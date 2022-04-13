@@ -2,10 +2,10 @@
 #define MAIN_H
 
 #include <stdlib.h>
-#include <stdarg.h>
 #include <stdio.h>
-#include <limits.h>
 #include <unistd.h>
+#include <sys/wait.h>
+#include <sys/types.h>
 
 int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
