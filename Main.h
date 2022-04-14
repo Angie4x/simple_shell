@@ -14,9 +14,8 @@ char *_strcat(char *dest, char *src);
 int _clear(char **args);
 int _cd(char **args);
 int _help(char **args);
-int _exit(char **args);
+int function_exit(char **args);
 int _ls(char **args);
-int _pause(char **args);
 int _echo(char **args);
 
 #endif
