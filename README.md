@@ -1,5 +1,5 @@
 <a href="https://imgbb.com/"><img src="https://i.ibb.co/M6rfJ8J/Captura-de-Pantalla-2022-04-15-a-la-s-10-28-32-p-m.png" alt="Captura-de-Pantalla-2022-04-15-a-la-s-10-28-32-p-m" border="0" /></a>
-# _SIMPLE SHELL_
+
 
 ****
 ## Table Of Contents
