@@ -5,7 +5,7 @@
 #define TOK_DELIM " \t\r\n\a"
 
 /** functions call */
-char (*array_str[]) = {
+char (*array_str[256]) = {
 	"clear",
 	"cd",
 	"help",
@@ -15,7 +15,7 @@ char (*array_str[]) = {
 };
 
 /** information statement */
-char (*array_info[]) = {
+char (*array_info[256]) = {
 	"cd command is used to change the current working directory",
 	"ls is a command to list computer files",
 	"clear command that is used to clear the terminal screen",
@@ -23,8 +23,8 @@ char (*array_info[]) = {
 	"exit command is used to exit from the current shell"
 };
 
-/** function declaration */
-int (*array_function[])(char **) = {
+/** functions_array - function declaration */
+int ((*functions_array[256])(char **)) = {
 	&_clear,
 	&_cd,
 	&_help,
@@ -51,7 +51,7 @@ int length_array_bit(void)
 int _cd(char **args)
 {
 	/** we ask if the argument is different to NULL or is empty */
-	if (args[1] != NULL && args[1] != "")
+	if (args[1] != NULL)
 	{
 		if (chdir(args[1]) != 0)
 			printf("directory <%s> not found \n", args[1]);
@@ -67,22 +67,23 @@ int _cd(char **args)
 *
 *
 */
-int _help(char **args)
+int _help(__attribute__ ((unused)) char **args)
 {
-	printf("Welcome to my personal shell\n");
-	int i = 0;
+	int i;
 
+	printf("Welcome to my personal shell\n");
 	for (i = 0; i < length_array_bit() - 1; i++)
 		printf(" %s\n", array_info[i]);
 	return (1);
 }
+
 
 /**
 *
 *
 *
 */
-int function_exit(char **args)
+int function_exit(__attribute__ ((unused))char **args)
 {
 	return (0);
 }
@@ -92,7 +93,19 @@ int function_exit(char **args)
 *
 *
 */
-int _ls(char **args)
+int _clear(char **args)
+{
+	if (args[1])
+		system("clear");
+	return (1);
+}
+
+/**
+*
+*
+*
+*/
+int _ls(__attribute__ ((unused))char **args)
 {
 	system("ls");
 	return (1);
@@ -105,7 +118,7 @@ int _ls(char **args)
 */
 int _echo(char **args)
 {
-	if (args[1] == NULL || args[1] == "")
+	if (args[1] == NULL)
 		printf("specifies an argument\n");
 	else
 		printf("%s\n", args[1]);
@@ -156,8 +169,8 @@ int command(char **args)
 		return (1);
 	for (i = 0; i < length_array_bit(); i++)
 	{
-		if (_strcmp(args[0], array_str[i] == 0)
-			return ((*array_function[i])(args));
+		if ((_strcmp(args[0], array_str[i]) == 0))
+			return ((*functions_array[i])(args));
 	}
 	return (program_threads(args));
 }
@@ -244,10 +257,10 @@ char **split_line(char *line)
 	return tokens;
 }
 
-int main(int argc, char **argv)
+int main(__attribute__ ((unused))int argc, char **argv)
 {
 	char *line;
-	char **args;
+	char **args = 0;
 	int status;
 
 	do
