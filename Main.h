@@ -6,6 +6,8 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include <string.h>
+#define TOK_DELIM  "\t\r\n\a"
 
 int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
@@ -21,7 +23,7 @@ char *lecture(void);
 int program_threads(char **args);
 int function_exit(__attribute__ ((unused))char **args);
 int length_array_bit(void);
-int ((*functions_array[256])(char **));
+int (*functions_array[256])(char **);
 char *array_info[256];
 char *array_str[256];
 char **split_line(char *line);

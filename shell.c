@@ -2,7 +2,7 @@
 
 #define BUFSIZE 1024
 #define TOK_BUFSIZE 64
-#define TOK_DELIM " \t\r\n\a"
+/**#define TOK_DELIM  "\t\r\n\a"*/
 
 /** functions call */
 char (*array_str[256]) = {
@@ -24,7 +24,7 @@ char (*array_info[256]) = {
 };
 
 /** functions_array - function declaration */
-int ((*functions_array[256])(char **)) = {
+int (*functions_array[256])(char **) = {
 	&_clear,
 	&_cd,
 	&_help,
