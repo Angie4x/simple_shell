@@ -169,7 +169,10 @@ int command(char **args)
 	for (i = 0; i < length_array_bit(); i++)
 	{
 		if ((_strcmp(args[0], array_str[i]) == 0))
-			return ((*functions_array[i])(args));
+		  {
+		    printf ("%s", args[0]);
+		    return ((*functions_array[i])(args));
+		  }
 	}
 	return (program_threads(args));
 }
@@ -183,9 +186,9 @@ char *lecture(void)
 {
 	int bufsize = BUFSIZE;
 	int position = 0;
-	int var = 0;
+	int var;
 	char *buffer = malloc(sizeof(char) * bufsize);
-
+	
 	if (!buffer)
 	{
 		printf("not found\n");
@@ -193,7 +196,7 @@ char *lecture(void)
 	}
 	while (1)
 	{
-		var = getchar(); /** character string */
+	  var = getchar(); /** character string */ 
 		if (var == '\n')
 		{
 			buffer[position] = '\0';
@@ -263,7 +266,7 @@ int main(__attribute__ ((unused))int argc, char **argv)
 	int status;
 
 	do {
-		printf("%dShellAngie~$ ", system("pwd"));
+		printf("simple_shell");
 		if (argv[1] != NULL)
 		{
 			line = argv[1];
