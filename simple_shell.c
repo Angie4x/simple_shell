@@ -203,8 +203,8 @@ char *lecture(void)
 			exit(EXIT_SUCCESS);
 		else
 			buffer[position] = var;
+		position++;
 	}
-	position++;
 	if (position >= bufsize)
 	{
 		bufsize += BUFSIZE;
