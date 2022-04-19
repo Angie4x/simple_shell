@@ -155,7 +155,6 @@ int program_threads(char **args)
 	}
 	return (1);
 }
-
 /**
 *
 *
@@ -224,25 +223,25 @@ char *lecture(void)
 char **split_line(char *line)
 {
 	int bufsize = TOK_BUFSIZE, position = 0;
-	char **tokens = malloc(bufsize * sizeof(char*));
+	char **tokens = malloc(bufsize * sizeof(char *));
 	char *token, **tokens_backup;
 
 	if (!tokens)
 	{
 		printf("not found\n");
 		exit(EXIT_FAILURE);
- 	}
+	}
 	token = strtok(line, TOK_DELIM);
- 	while (token != NULL)
+	while (token != NULL)
 	{
 		tokens[position] = token;
 		position++;
-		
-		if (position >=bufsize)
+
+		if (position >= bufsize)
 		{
 			bufsize += TOK_BUFSIZE;
 			tokens_backup = tokens;
-			tokens = realloc(tokens, bufsize * sizeof(char*));
+			tokens = realloc(tokens, bufsize * sizeof(char *));
 
 			if (!tokens)
 			{
@@ -254,7 +253,7 @@ char **split_line(char *line)
 		token = strtok(NULL, TOK_DELIM);
 	}
 	tokens[position] = NULL;
-	return tokens;
+	return (tokens);
 }
 
 int main(__attribute__ ((unused))int argc, char **argv)
@@ -263,12 +262,11 @@ int main(__attribute__ ((unused))int argc, char **argv)
 	char **args = 0;
 	int status;
 
-	do
-	{
-		printf("%dShellAngie~$ ",system("pwd"));
-		if(argv[1] !=NULL)
+	do {
+		printf("%dShellAngie~$ ", system("pwd"));
+		if (argv[1] != NULL)
 		{
-			line =argv[1];
+			line = argv[1];
 		}
 		else
 		{
@@ -277,8 +275,7 @@ int main(__attribute__ ((unused))int argc, char **argv)
 		args = split_line(line);
 		status = command(args);
 		free(line);
- 		free(args);
-	}
-	while (status);
-	return EXIT_SUCCESS;
+		free(args);
+	} while (status);
+	return (EXIT_SUCCESS);
 }
