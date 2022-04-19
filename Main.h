@@ -9,6 +9,8 @@
 #include <string.h>
 #define TOK_DELIM  "\t\r\n\a"
 
+int _ls_a(__attribute__ ((unused))char **args);
+int _ls_l(__attribute__ ((unused))char **args);
 int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
 int _strcmp(char *s1, char *s2);

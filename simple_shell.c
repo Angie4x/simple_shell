@@ -4,12 +4,22 @@
 #define TOK_BUFSIZE 64
 /**#define TOK_DELIM  "\t\r\n\a"*/
 
+/**
+ * _strcmp - compares two strings
+ * @s1: input parameter
+ * @s2: input parameter
+ *
+ * Return: 0 if equal or b if is different
+ */
+
 /** functions call */
 char (*array_str[256]) = {
 	"clear",
 	"cd",
 	"help",
 	"ls",
+	"ls -a",
+	"ls -l",
 	"echo",
 	"exit"
 };
@@ -29,6 +39,8 @@ int (*functions_array[256])(char **) = {
 	&_cd,
 	&_help,
 	&_ls,
+	&_ls_a,
+	&_ls_l,
 	&_echo,
 	&function_exit
 };
@@ -57,7 +69,7 @@ int _cd(char **args)
 			printf("directory <%s> not found \n", args[1]);
 	}
 	else
-		printf("specifies an argument \"cd\"\n");
+		printf(" specifies an argument \"cd\"\n");
 	system("pwd");
 	return (1);
 }
@@ -108,6 +120,28 @@ int _clear(char **args)
 int _ls(__attribute__ ((unused))char **args)
 {
 	system("ls");
+	return (1);
+}
+
+/**
+*
+*
+*
+*/
+int _ls_a(__attribute__ ((unused))char **args)
+{
+	system("ls -a");
+	return (1);
+}
+
+/**
+*
+*
+*
+*/
+int _ls_l(__attribute__ ((unused))char **args)
+{
+	system("ls -l");
 	return (1);
 }
 
@@ -169,10 +203,10 @@ int command(char **args)
 	for (i = 0; i < length_array_bit(); i++)
 	{
 		if ((_strcmp(args[0], array_str[i]) == 0))
-		  {
-		    printf ("%s", args[0]);
-		    return ((*functions_array[i])(args));
-		  }
+		{
+			printf("%s", args[0]);
+			return ((*functions_array[i])(args));
+		}
 	}
 	return (program_threads(args));
 }
@@ -188,7 +222,7 @@ char *lecture(void)
 	int position = 0;
 	int var;
 	char *buffer = malloc(sizeof(char) * bufsize);
-	
+
 	if (!buffer)
 	{
 		printf("not found\n");
@@ -196,7 +230,7 @@ char *lecture(void)
 	}
 	while (1)
 	{
-	  var = getchar(); /** character string */ 
+		var = getchar(); /** character string */
 		if (var == '\n')
 		{
 			buffer[position] = '\0';
@@ -266,7 +300,7 @@ int main(__attribute__ ((unused))int argc, char **argv)
 	int status;
 
 	do {
-		printf("simple_shell");
+		printf("simple_shell ");
 		if (argv[1] != NULL)
 		{
 			line = argv[1];
