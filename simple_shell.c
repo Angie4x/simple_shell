@@ -2,53 +2,10 @@
 
 #define BUFSIZE 1024
 #define TOK_BUFSIZE 64
-/**#define TOK_DELIM  "\t\r\n\a"*/
-
 /**
- * _strcmp - compares two strings
- * @s1: input parameter
- * @s2: input parameter
- *
- * Return: 0 if equal or b if is different
- */
-
-/** functions call */
-char (*array_str[256]) = {
-	"clear",
-	"cd",
-	"help",
-	"ls",
-	"ls -a",
-	"ls -l",
-	"echo",
-	"exit"
-};
-
-/** information statement */
-char (*array_info[256]) = {
-	"cd command is used to change the current working directory",
-	"ls is a command to list computer files",
-	"clear command that is used to clear the terminal screen",
-	"command that outputs the strings that are passed to it as arguments",
-	"exit command is used to exit from the current shell"
-};
-
-/** functions_array - function declaration */
-int (*functions_array[256])(char **) = {
-	&_clear,
-	&_cd,
-	&_help,
-	&_ls,
-	&_ls_a,
-	&_ls_l,
-	&_echo,
-	&function_exit
-};
-
-/**
+*length_array_bit - size function
 *
-*
-*
+*Return: sizeof array_str / sizeof char *
 */
 int length_array_bit(void)
 {
@@ -56,113 +13,9 @@ int length_array_bit(void)
 }
 
 /**
-*
-*
-*
-*/
-int _cd(char **args)
-{
-	/** we ask if the argument is different to NULL or is empty */
-	if (args[1] != NULL)
-	{
-		if (chdir(args[1]) != 0)
-			printf("directory <%s> not found \n", args[1]);
-	}
-	else
-		printf(" specifies an argument \"cd\"\n");
-	system("pwd");
-	return (1);
-}
-
-/**
-*
-*
-*
-*/
-int _help(__attribute__ ((unused)) char **args)
-{
-	int i;
-
-	printf("Welcome to my personal shell\n");
-	for (i = 0; i < length_array_bit() - 1; i++)
-		printf(" %s\n", array_info[i]);
-	return (1);
-}
-
-
-/**
-*
-*
-*
-*/
-int function_exit(__attribute__ ((unused))char **args)
-{
-	return (0);
-}
-
-/**
-*
-*
-*
-*/
-int _clear(char **args)
-{
-	if (args[1])
-		system("clear");
-	return (1);
-}
-
-/**
-*
-*
-*
-*/
-int _ls(__attribute__ ((unused))char **args)
-{
-	system("ls");
-	return (1);
-}
-
-/**
-*
-*
-*
-*/
-int _ls_a(__attribute__ ((unused))char **args)
-{
-	system("ls -a");
-	return (1);
-}
-
-/**
-*
-*
-*
-*/
-int _ls_l(__attribute__ ((unused))char **args)
-{
-	system("ls -l");
-	return (1);
-}
-
-/**
-*
-*
-*
-*/
-int _echo(char **args)
-{
-	if (args[1] == NULL)
-		printf("specifies an argument\n");
-	else
-		printf("%s\n", args[1]);
-	return (1);
-}
-
-/**
-*
-*
-*
+*program_threads - start the program and wait for it to finish
+*@args: arguments
+*Return: 1
 */
 int program_threads(char **args)
 {
@@ -190,9 +43,9 @@ int program_threads(char **args)
 	return (1);
 }
 /**
-*
-*
-*
+*command - check the commands
+*@args: arguents
+*Return: program_threads(args)
 */
 int command(char **args)
 {
@@ -212,9 +65,9 @@ int command(char **args)
 }
 
 /**
+*lecture - read the command line
 *
-*
-*
+*Return: always 0
 */
 char *lecture(void)
 {
@@ -255,8 +108,10 @@ char *lecture(void)
 }
 
 /**
- *separates the string of commands in a program and its arguments
- */
+*split_line - separates the string of commands in a program and its arguments
+*@line: variable name
+*Return: Tokens
+*/
 char **split_line(char *line)
 {
 	int bufsize = TOK_BUFSIZE, position = 0;
@@ -291,28 +146,4 @@ char **split_line(char *line)
 	}
 	tokens[position] = NULL;
 	return (tokens);
-}
-
-int main(__attribute__ ((unused))int argc, char **argv)
-{
-	char *line;
-	char **args = 0;
-	int status;
-
-	do {
-		printf("simple_shell ");
-		if (argv[1] != NULL)
-		{
-			line = argv[1];
-		}
-		else
-		{
-			line = lecture();
-		}
-		args = split_line(line);
-		status = command(args);
-		free(line);
-		free(args);
-	} while (status);
-	return (EXIT_SUCCESS);
 }
