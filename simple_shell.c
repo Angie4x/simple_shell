@@ -2,6 +2,7 @@
 
 #define BUFSIZE 1024
 #define TOK_BUFSIZE 64
+
 /**
 *length_array_bit - size function
 *
