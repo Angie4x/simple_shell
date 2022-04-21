@@ -66,3 +66,7 @@ This wil compile all the '.c' files and change the output's name to 'hsh'.
 
 ## Authors
 Angie Aldana, Daniel Novoa.
+
+## Flowchart Shell
+
+<a href="https://ibb.co/cLtR2t8"><img src="https://i.ibb.co/X8p6Fp5/Flowchart-shell.jpg" alt="Flowchart-shell" border="0"></a>
